@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { Controller } from '../../controller/controller';
+
 /**
  * Generated class for the MapPage page.
  *
@@ -14,7 +16,14 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class MapPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private controller: Controller) {
+    this.getStations();
+  }
+
+  async getStations() {
+    let stations = await this.controller.getStations();
+
+    console.log(stations);
   }
 
   ionViewDidLoad() {
