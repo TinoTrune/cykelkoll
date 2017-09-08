@@ -21,7 +21,7 @@ export class FavoritePage {
   stations: any;
   favoriteStations: any;
 
-  stationListItems: any;
+  stationListItems = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public nativeStorge: NativeStorage, private controller: Controller) {
     this.setStations();
