@@ -12,12 +12,14 @@ import { Provider } from '../controller/provider';
 import { AboutPage } from '../pages/about/about';
 import { FavoritePage } from '../pages/favorite/favorite';
 import { MapPage } from '../pages/map/map';
+import { StationDetailPage } from '../pages/station-detail/station-detail';
 import { TabsPage } from '../pages/tabs/tabs';
 
 // Native frameworks.
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
     AboutPage,
     FavoritePage,
     MapPage,
+    StationDetailPage,
     TabsPage
   ],
   imports: [
@@ -38,6 +41,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
     AboutPage,
     FavoritePage,
     MapPage,
+    StationDetailPage,
     TabsPage
   ],
   providers: [
@@ -46,6 +50,7 @@ import { NativeStorage } from '@ionic-native/native-storage';
     Controller,
     Provider,
     NativeStorage,
+    GoogleMaps,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

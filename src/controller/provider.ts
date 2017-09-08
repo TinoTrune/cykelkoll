@@ -29,4 +29,14 @@ export class Provider {
     .toPromise();
   }
 
+  public getStationWithDistance(lat: String, lng: String): Promise<Response> {
+    let param1 = '&latitude=' + lat;
+    let param2 = '&longitude=' + lng;
+
+    let params = param1 + param2;
+
+    return this.http.get(this.api_url + params)
+    .toPromise();
+  }
+
 }
