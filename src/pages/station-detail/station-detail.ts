@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, NgZone} from '@angular/core';
+import { NavController, NavParams, Events} from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
 
 import { Controller } from '../../controller/controller';
@@ -29,7 +29,7 @@ export class StationDetailPage {
 
   favorites = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public nativeStorge: NativeStorage, private controller: Controller) {
+  constructor(public zone: NgZone, public navCtrl: NavController, public navParams: NavParams, public events: Events, public nativeStorge: NativeStorage, private controller: Controller) {
     // Get the parameters from previous page.
     this.station = navParams.get('station');
     if(this.station == null) {
@@ -80,7 +80,7 @@ export class StationDetailPage {
     } catch(e) {
       console.log(e);
     }
-    
+
     if(this.favorites == null) {
       this.favorites = [];
     }
@@ -91,6 +91,12 @@ export class StationDetailPage {
 
     this.isFavorite = true;
     this.isClicking = false;
+
+    // Update the favorite page with the new stations.
+    this.events.publish('reloadFavoritePage');
+
+    // Force-update the screen. The button is kinda slow here, so it's better to force update it.
+    this.zone.run(() => {});
   }
 
   async removeFavorite() {
@@ -115,6 +121,9 @@ export class StationDetailPage {
       await this.nativeStorge.setItem('favorites', this.favorites);
 
       this.isFavorite = false;
+
+      // Update the favorite page with the new stations.
+      this.events.publish('reloadFavoritePage');
     }
 
     this.isClicking = false;
