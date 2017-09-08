@@ -10,8 +10,8 @@ import {
  Marker,
  HtmlInfoWindow
 } from '@ionic-native/google-maps';
-
 import { Controller } from '../../controller/controller';
+import { StationDetailPage } from '../station-detail/station-detail';
 
 /**
  * Generated class for the MapPage page.
@@ -99,7 +99,11 @@ export class MapPage {
          }).then(marker => {
               // On info window clicked.
               marker.on(GoogleMapsEvent.INFO_CLICK).subscribe(() => {
-                console.log("Hej!");
+
+                // Navigate to the detail page of a station.
+                this.navCtrl.push(StationDetailPage, {
+                  station: station
+                });
               });
           });
 
