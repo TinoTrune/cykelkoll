@@ -7,12 +7,44 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>favorite</ion-title>
+    <ion-title>Favoriter</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <div *ngIf="stationListItems.length > 0">
+    <ion-list-header>Mina Favorit Stationer</ion-list-header>
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of stationListItems">
+
+        <button ion-item detail-none (click)="stationClicked(item)">
+          <ion-icon item-start name='bicycle'></ion-icon>
+          <div item-content style="width:100%;">
+            <h2 [innerText]= "item.name"></h2>
+            <p>Cyklar: {{item.availableBikes}}st, Lediga ställ: {{item.availableBikeStands}}st</p>
+          </div>
+          <ion-icon item-end name="ios-information-circle-outline"></ion-icon>
+        </button>
+
+        <ion-item-options>
+          <button ion-button color="danger" (click)="removeFavorite(item)">Ta bort</button>
+        </ion-item-options>
+
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <div padding-top *ngIf="stationListItems.length == 0" style="text-align:center;">
+    <ion-card>
+      <img src='https://i.pinimg.com/originals/ae/8a/c2/ae8ac2fa217d23aadcc913989fcc34a2.png'/>
+      <ion-card-content>
+        <ion-card-title>Du har inga favorit stationer!</ion-card-title>
+        <p>Hitta stationer genom att gå in i</p>
+        <p>kartvyn eller listvyn.</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
 </ion-content>
