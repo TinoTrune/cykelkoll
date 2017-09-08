@@ -52,6 +52,7 @@ export class FavoritePage {
       if(station != null) {
         this.stationListItems.push({
           station: station,
+          id: station.id,
           name: station.name,
           availableBikes: station.availableBikes,
           availableBikeStands: station.availableBikeStands
@@ -67,8 +68,30 @@ export class FavoritePage {
     });
   }
 
-  removeFavorite(item) {
+  async removeFavorite(item) {
+    try {
+      this.favoriteStations = await this.nativeStorge.getItem('favorites');
+    } catch(e) {
+      console.log(e);
+    }
 
+    if(this.favoriteStations == null) {
+      return;
+    } else {
+      // See if the station id exists in favorites. If it's a positive index, it contains in the favorites.
+      let index = this.favoriteStations.indexOf(item.id);
+      let itemIndex = this.stationListItems.indexOf(item);
+
+      if(index > -1) {
+        this.favoriteStations.splice(index, 1);
+      }
+      if(itemIndex > -1) {
+        this.stationListItems.splice(itemIndex, 1);
+      }
+
+      // Removed the station from the favorites and push it to the native storage.
+      await this.nativeStorge.setItem('favorites', this.favoriteStations);
+    }
   }
 
 }
