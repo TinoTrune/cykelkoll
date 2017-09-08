@@ -25,11 +25,15 @@ export class Controller {
         name: station.Name,
         lat: station.Lat,
         lng: station.Long,
+        distance: 0,
         isOpen: station.IsOpen,
         bikeStands: station.BikeStands,
         availableBikes: station.AvailableBikes,
         availableBikeStands: station.AvailableBikeStands,
-        lastUpdate: station.LastUpdate
+        lastUpdate: station.LastUpdate,
+
+        // This icon is for Google Maps Marker.
+        icon: this.getIcon(station.AvailableBikes)
       }
 
       // Add the new station to the list.
@@ -37,6 +41,19 @@ export class Controller {
     }
 
     return stations;
+  }
+
+  // Set the icon depending on the amount of available bikes.
+  getIcon(amount: number): string {
+    let iconUrl = "";
+
+    if(amount < 9) {
+      iconUrl = 'http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/48/Number-' + amount.toString() + '-icon.png';
+    } else {
+      iconUrl = 'http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/48/Number-9-icon.png';
+    }
+
+    return iconUrl;
   }
 
 }
