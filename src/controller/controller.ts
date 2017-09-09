@@ -19,28 +19,54 @@ export class Controller {
     let stations = [];
     for(let station of result.json()) {
 
-      // Model initiation.
-      var newStation: Station = {
-        id: station.StationId,
-        name: station.Name,
-        lat: station.Lat,
-        lng: station.Long,
-        distance: 0,
-        isOpen: station.IsOpen,
-        bikeStands: station.BikeStands,
-        availableBikes: station.AvailableBikes,
-        availableBikeStands: station.AvailableBikeStands,
-        lastUpdate: station.LastUpdate,
-
-        // This icon is for Google Maps Marker.
-        icon: this.getIcon(station.AvailableBikes)
-      }
-
       // Add the new station to the list.
-      stations.push(newStation);
+      stations.push(this.newStation(station));
     }
 
     return stations;
+  }
+
+  // Get all the stations from the API with a lat and lng given rotation to calculate the distance.
+  // Returns a list of the stations with a distance of given lat and lng.
+  async getStationsWithDistance(lat: String, lng: String) {
+    // Asynchronous call.
+    let result = await this.provider.getStationWithDistance(lat, lng);
+
+    let stations = [];
+    for(let station of result.json()) {
+
+      // Add the new station to the list.
+      stations.push(this.newStation(station));
+    }
+
+    return stations;
+  }
+
+  // Creates a new model from Json object result.
+  newStation(station: any) {
+    // If the there are no distance, give it the default value of 0.
+    let distance = 0;
+    if(station.Distance != null) {
+      distance = station.Distance;
+    }
+
+    var newStation: Station = {
+      id: station.StationId,
+      name: station.Name,
+      lat: station.Lat,
+      lng: station.Long,
+      distance: distance,
+      isOpen: station.IsOpen,
+      bikeStands: station.BikeStands,
+      availableBikes: station.AvailableBikes,
+      availableBikeStands: station.AvailableBikeStands,
+      lastUpdate: station.LastUpdate,
+
+      // This icon is for Google Maps Marker.
+      icon: this.getIcon(station.AvailableBikes)
+    }
+
+    return newStation;
   }
 
   // Set the icon depending on the amount of available bikes.

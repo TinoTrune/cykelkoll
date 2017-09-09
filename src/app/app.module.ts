@@ -12,6 +12,7 @@ import { Provider } from '../controller/provider';
 import { AboutPage } from '../pages/about/about';
 import { FavoritePage } from '../pages/favorite/favorite';
 import { MapPage } from '../pages/map/map';
+import { ListPage } from '../pages/list/list';
 import { StationDetailPage } from '../pages/station-detail/station-detail';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -20,6 +21,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     AboutPage,
     FavoritePage,
     MapPage,
+    ListPage,
     StationDetailPage,
     TabsPage
   ],
@@ -41,6 +44,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     AboutPage,
     FavoritePage,
     MapPage,
+    ListPage,
     StationDetailPage,
     TabsPage
   ],
@@ -51,6 +55,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     Provider,
     NativeStorage,
     GoogleMaps,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
