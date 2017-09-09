@@ -88,8 +88,8 @@ export class MapPage {
            icon: {
              url: station.icon,
              size: {
-               width: 28,
-               height: 28
+               width: 32,
+               height: 37
              }
            },
            position: {
