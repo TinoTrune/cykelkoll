@@ -22,6 +22,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     NativeStorage,
     GoogleMaps,
     Geolocation,
+    LaunchNavigator,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

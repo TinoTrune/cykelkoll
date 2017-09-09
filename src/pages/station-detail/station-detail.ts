@@ -1,6 +1,8 @@
 import { Component, NgZone} from '@angular/core';
 import { NavController, NavParams, Events} from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { Geolocation } from '@ionic-native/geolocation';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 
 import { Controller } from '../../controller/controller';
 
@@ -29,7 +31,7 @@ export class StationDetailPage {
 
   favorites = [];
 
-  constructor(public zone: NgZone, public navCtrl: NavController, public navParams: NavParams, public events: Events, public nativeStorge: NativeStorage, private controller: Controller) {
+  constructor(public zone: NgZone, public navCtrl: NavController, public navParams: NavParams, public events: Events, public nativeStorge: NativeStorage, private geolocation: Geolocation, private launchNavigator: LaunchNavigator, private controller: Controller) {
     // Get the parameters from previous page.
     this.station = navParams.get('station');
     if(this.station == null) {
@@ -70,6 +72,27 @@ export class StationDetailPage {
     } else {
       this.isFavorite = true;
     }
+  }
+
+  // Open the native map-app to navigate from the current location to the station location.
+  async openNavApp() {
+    var currentPositionOptions = {
+      enableHighAccuracy: true
+    };
+
+    await this.geolocation.getCurrentPosition(currentPositionOptions).then((resp) => {
+      let navOptions: LaunchNavigatorOptions = {
+        start: [resp.coords.latitude, resp.coords.longitude]
+      };
+
+      this.launchNavigator.navigate([this.station.lat, this.station.lng], navOptions)
+      .then(
+        success => console.log('Launched navigator'),
+        error => console.log('Error launching navigator', error)
+      );
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
   }
 
   async addFavorite() {
