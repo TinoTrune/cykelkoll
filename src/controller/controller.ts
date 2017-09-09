@@ -71,15 +71,14 @@ export class Controller {
 
   // Set the icon depending on the amount of available bikes.
   getIcon(amount: number): string {
-    let iconUrl = "";
-
-    if(amount < 9) {
-      iconUrl = 'http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/48/Number-' + amount.toString() + '-icon.png';
+    let icon = "";
+    if(amount == null) {
+      icon = 'www/assets/marker/symbol_inter.png';
     } else {
-      iconUrl = 'http://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/48/Number-9-icon.png';
+      icon = 'www/assets/marker/number_' + amount.toString() +'.png';
     }
 
-    return iconUrl;
+    return icon;
   }
 
 }

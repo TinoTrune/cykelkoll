@@ -20,7 +20,7 @@
       <ion-item-sliding *ngFor="let item of stationListItems">
 
         <button ion-item detail-none (click)="stationClicked(item)">
-          <ion-icon item-start name='bicycle'></ion-icon>
+          <ion-icon [ngStyle]="{'color':item.iconColor}" item-start name='bicycle'></ion-icon>
           <div item-content style="width:100%;">
             <h2 [innerText]= "item.name"></h2>
             <p>Cyklar: {{item.availableBikes}}st, Lediga ställ: {{item.availableBikeStands}}st</p>

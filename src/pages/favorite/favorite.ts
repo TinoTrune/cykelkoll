@@ -55,7 +55,8 @@ export class FavoritePage {
           id: station.id,
           name: station.name,
           availableBikes: station.availableBikes,
-          availableBikeStands: station.availableBikeStands
+          availableBikeStands: station.availableBikeStands,
+          iconColor: this.getIconColor(station.availableBikes)
         });
       }
     }
@@ -66,6 +67,18 @@ export class FavoritePage {
     this.navCtrl.push(StationDetailPage, {
       station: item.station
     });
+  }
+
+  // Return the color depending on the number.
+  // Low number should be red, medium number orange and high number green.
+  getIconColor(amount: number) {
+    if(amount > 9) {
+      return "green";
+    } else if (amount > 3) {
+      return "orange";
+    } else {
+      return "red";
+    }
   }
 
   async removeFavorite(item) {
