@@ -50,6 +50,21 @@ export class Controller {
       distance = station.Distance;
     }
 
+    let availableBikes = '';
+    let availableBikeStands = '';
+
+    if(station.AvailableBikes == null) {
+      availableBikes = 'Ingen data';
+    } else {
+      availableBikes = station.AvailableBikes;
+    }
+
+    if(station.AvailableBikeStands == null) {
+      availableBikeStands = 'Ingen data';
+    } else {
+      availableBikeStands = station.AvailableBikeStands;
+    }
+
     var newStation: Station = {
       id: station.StationId,
       name: station.Name,
@@ -58,12 +73,13 @@ export class Controller {
       distance: distance,
       isOpen: station.IsOpen,
       bikeStands: station.BikeStands,
-      availableBikes: station.AvailableBikes,
-      availableBikeStands: station.AvailableBikeStands,
+      availableBikes: availableBikes,
+      availableBikeStands: availableBikeStands,
       lastUpdate: station.LastUpdate,
 
       // This icon is for Google Maps Marker.
-      icon: this.getIcon(station.AvailableBikes)
+      bike_icon: this.getIcon(station.AvailableBikes),
+      bikestand_icon: this.getIcon(station.AvailableBikeStands)
     }
 
     return newStation;

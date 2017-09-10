@@ -6,9 +6,10 @@ export interface Station {
   distance?: number;
   isOpen?: boolean;
   bikeStands?: number;
-  availableBikes?: number;
-  availableBikeStands?: number;
+  availableBikes?: number | string;
+  availableBikeStands?: number | string;
   lastUpdate?: string;
 
-  icon?: string;
+  bike_icon?: string;
+  bikestand_icon?: string;
 }

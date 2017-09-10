@@ -31,6 +31,9 @@ export class MapPage {
 
   stations: any;
 
+  // Segment value that controlls what kind of number tracking for the markers.
+  markerType = 'bike';
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, private controller: Controller, private googleMaps: GoogleMaps) {
     platform.ready().then(() => {
       this.loadMap();
@@ -81,35 +84,54 @@ export class MapPage {
       console.log('Map is ready!');
 
       for(let station of this.stations) {
-
-        this.map.addMarker({
-           title: station.name,
-           snippet: 'Cyklar: ' + station.availableBikes + ', Lediga ställ: ' + station.availableBikeStands,
-           icon: {
-             url: station.icon,
-             size: {
-               width: 32,
-               height: 37
-             }
-           },
-           position: {
-             lat: station.lat,
-             lng: station.lng
-           }
-         }).then(marker => {
-              // On info window clicked.
-              marker.on(GoogleMapsEvent.INFO_CLICK).subscribe(() => {
-
-                // Navigate to the detail page of a station.
-                this.navCtrl.push(StationDetailPage, {
-                  station: station
-                });
-              });
-          });
-
-      } // End for-loop
+        this.addMarker(station, station.bike_icon);
+      }
 
     }); // End addMarker
+  }
+
+  // Change the markers in the map to show the number of available bikes or available bikeStands.
+  segmentChanged() {
+    this.map.clear();
+
+    if(this.markerType == 'bike') {
+      for(let station of this.stations) {
+        this.addMarker(station, station.bike_icon);
+      }
+    } else if (this.markerType == 'bikeStands') {
+      for(let station of this.stations) {
+        this.addMarker(station, station.bikestand_icon);
+      }
+    }
+  }
+
+  // Add the marker to the map.
+  // The icons show how many bikes/stands that are available and what it shows is dependent on the segmentcontroll.
+  addMarker(station: any, icon: any) {
+    this.map.addMarker({
+       title: station.name,
+       snippet: 'Cyklar: ' + station.availableBikes + ', Lediga ställ: ' + station.availableBikeStands,
+       icon: {
+         url: icon,
+         size: {
+           width: 32,
+           height: 37
+         }
+       },
+       position: {
+         lat: station.lat,
+         lng: station.lng
+       }
+     }).then(marker => {
+          // On info window clicked.
+          marker.on(GoogleMapsEvent.INFO_CLICK).subscribe(() => {
+
+            // Navigate to the detail page of a station.
+            this.navCtrl.push(StationDetailPage, {
+              station: station
+            });
+          });
+      });
   }
 
 }
