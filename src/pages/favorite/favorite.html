@@ -12,18 +12,29 @@
 
 </ion-header>
 
-
 <ion-content>
+
   <div *ngIf="stationListItems.length > 0">
+
+    <ion-segment [(ngModel)]="markerType" color="primary">
+      <ion-segment-button value="bike">
+        <ion-icon name="bicycle"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="bikeStands">
+        <ion-icon name="pie"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+
     <ion-list-header>Mina Favorit Stationer</ion-list-header>
     <ion-list>
       <ion-item-sliding *ngFor="let item of stationListItems">
 
         <button ion-item detail-none (click)="stationClicked(item)">
-          <ion-icon [ngStyle]="{'color':item.iconColor}" item-start name='bicycle'></ion-icon>
+          <ion-icon *ngIf="markerType == 'bike'" [ngStyle]="{'color':item.bikeIconColor}" item-start name='bicycle'></ion-icon>
+          <ion-icon *ngIf="markerType == 'bikeStands'" [ngStyle]="{'color':item.bikeStandIconColor}" item-start name='pie'></ion-icon>
           <div item-content style="width:100%;">
             <h2 [innerText]= "item.name"></h2>
-            <p>Cyklar: {{item.availableBikes}}st, Lediga ställ: {{item.availableBikeStands}}st</p>
+            <p>Cyklar: {{item.availableBikes}}, Lediga ställ: {{item.availableBikeStands}}</p>
           </div>
           <ion-icon item-end name="ios-information-circle-outline"></ion-icon>
         </button>

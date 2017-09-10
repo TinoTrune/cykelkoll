@@ -23,6 +23,10 @@ export class FavoritePage {
 
   stationListItems = [];
 
+  // Segment value that controlls what kind of icon the list is showing.
+  // The icon is color based on how much the number of availablity.
+  markerType = 'bike';
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public nativeStorge: NativeStorage, private controller: Controller) {
     this.setStations();
 
@@ -56,7 +60,8 @@ export class FavoritePage {
           name: station.name,
           availableBikes: station.availableBikes,
           availableBikeStands: station.availableBikeStands,
-          iconColor: this.getIconColor(station.availableBikes)
+          bikeIconColor: this.getIconColor(station.availableBikes),
+          bikeStandIconColor: this.getIconColor(station.availableBikeStands)
         });
       }
     }
