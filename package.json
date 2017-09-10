@@ -60,7 +60,9 @@
             "cordova-plugin-nativestorage": {},
             "cordova-plugin-googlemaps": {
                 "API_KEY_FOR_ANDROID": "AIzaSyBv-Gkp5SfiXfCNpD1W6Q3MlyebP1JhHsE",
-                "API_KEY_FOR_IOS": "AIzaSyBFgE4CPW8kEMikT-U0Ss6GXwTftMCUPx4"
+                "API_KEY_FOR_IOS": "AIzaSyBFgE4CPW8kEMikT-U0Ss6GXwTftMCUPx4",
+                "LOCATION_WHEN_IN_USE_DESCRIPTION": "Show your location on the map",
+                "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Trace your location on the map"
             },
             "cordova-plugin-console": {},
             "cordova-plugin-device": {},
@@ -68,7 +70,9 @@
             "cordova-plugin-statusbar": {},
             "cordova-plugin-whitelist": {},
             "ionic-plugin-keyboard": {},
-            "cordova-plugin-geolocation": {},
+            "cordova-plugin-geolocation": {
+                "GEOLOCATION_USAGE_DESCRIPTION": " "
+            },
             "uk.co.workingedge.phonegap.plugin.launchnavigator": {}
         },
         "platforms": [
