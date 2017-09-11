@@ -3,9 +3,13 @@ export interface Station {
   name?: string;
   lat?: number;
   lng?: number;
+  distance?: number;
   isOpen?: boolean;
   bikeStands?: number;
-  availableBikes?: number;
-  availableBikeStands?: number;
+  availableBikes?: number | string;
+  availableBikeStands?: number | string;
   lastUpdate?: string;
+
+  bike_icon?: string;
+  bikestand_icon?: string;
 }
